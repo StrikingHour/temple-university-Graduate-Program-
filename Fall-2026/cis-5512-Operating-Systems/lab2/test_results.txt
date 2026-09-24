@@ -1,0 +1,76 @@
+CIS 5512 Lab 3 - Unix Shell Test Results
+
+T01 - Basic command
+Command: pwd
+Expected: Current directory
+Actual: Correct current directory
+Status: PASS
+
+T02 - Command with arguments
+Command: ls -l
+Expected: Long directory listing
+Actual: Correct listing
+Status: PASS
+
+T03 - Built-in cd
+Commands:
+pwd
+cd ..
+pwd
+Expected: Working directory changes
+Actual: Working directory changed
+Status: PASS
+
+T04 - Single pipe
+Command: ls -l | wc
+Expected: Same output as Bash
+Actual: Same output as Bash
+Status: PASS
+
+T05 - Multiple pipes
+Command: ls -l | grep Name | wc
+Expected: Same output as Bash
+Actual: Same output as Bash
+Status: PASS
+
+T06 - Output redirection
+Command: echo Hello > output.txt
+Expected: output.txt contains Hello
+Actual: output.txt contains Hello
+Status: PASS
+
+T07 - Overwrite redirection
+Command: echo Replacement > output.txt
+Expected: Previous file contents removed
+Actual: Correct
+Status: PASS
+
+T08 - Append redirection
+Command: echo Second >> output.txt
+Expected: Second appended to file
+Actual: Correct
+Status: PASS
+
+T09 - Pipe and redirection
+Command: ls -l | wc -l > count.txt
+Expected: Result stored in count.txt
+Actual: Correct
+Status: PASS
+
+T10 - Invalid command
+Command: fakecommand123
+Expected: Error message and shell continues
+Actual: Error displayed and shell continued
+Status: PASS
+
+T11 - Empty input
+Command: [Enter]
+Expected: New prompt
+Actual: New prompt
+Status: PASS
+
+T12 - Exit
+Command: exit
+Expected: Shell terminates
+Actual: Shell terminated
+Status: PASS
