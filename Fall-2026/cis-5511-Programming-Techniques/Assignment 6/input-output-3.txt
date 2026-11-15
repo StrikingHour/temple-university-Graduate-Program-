@@ -1,0 +1,487 @@
+PT_06 - Word AVL tree: actual interactive input/output
+Run: python word_avl.py
+
+This extends the PT_05 tree_* interface. Repeated keys are ignored.
+Search returns membership (0 or 1). Insert/delete return membership before
+that operation. Height: empty = -1, leaf = 0. h = height; bf = left - right.
+
+The session first replays the commands from the submitted PT_05 sample.
+It then tests LL, RR, LR, and RL insertion, deletion with heavy-child balance
+zero in both directions, and deletion requiring repairs at two distinct nodes.
+The tree is emptied between scenarios. For the sequence j a b l e h g d k i f c,
+deleting h requires an RL repair at j and then an LL repair at i.
+
+Terminal input echo is reproduced; all program output is captured from main().
+
+
+Commands: search WORD | insert WORD | delete WORD | walk | print | quit
+> print
+(empty)
+> walk
+> search car
+0
+> delete car
+0
+> insert mango
+0
+> insert car
+0
+> insert tree
+0
+> insert apple
+0
+> insert dog
+0
+> insert sun
+0
+> insert zebra
+0
+> insert sun
+1
+> insert car
+1
+> search car
+1
+> search pear
+0
+> print
+Root: mango [h=2, bf=0]
+  L: car [h=1, bf=0]
+    L: apple [h=0, bf=0]
+      L: -
+      R: -
+    R: dog [h=0, bf=0]
+      L: -
+      R: -
+  R: tree [h=1, bf=0]
+    L: sun [h=0, bf=0]
+      L: -
+      R: -
+    R: zebra [h=0, bf=0]
+      L: -
+      R: -
+> walk
+apple
+car
+dog
+mango
+sun
+tree
+zebra
+> delete car
+1
+> search car
+0
+> delete apple
+1
+> delete car
+0
+> print
+Root: mango [h=2, bf=-1]
+  L: dog [h=0, bf=0]
+    L: -
+    R: -
+  R: tree [h=1, bf=0]
+    L: sun [h=0, bf=0]
+      L: -
+      R: -
+    R: zebra [h=0, bf=0]
+      L: -
+      R: -
+> delete mango
+1
+> search mango
+0
+> search sun
+1
+> print
+Root: sun [h=2, bf=-1]
+  L: dog [h=0, bf=0]
+    L: -
+    R: -
+  R: tree [h=1, bf=-1]
+    L: -
+    R: zebra [h=0, bf=0]
+      L: -
+      R: -
+> walk
+dog
+sun
+tree
+zebra
+> delete sun
+1
+> delete sun
+0
+> print
+Root: tree [h=1, bf=0]
+  L: dog [h=0, bf=0]
+    L: -
+    R: -
+  R: zebra [h=0, bf=0]
+    L: -
+    R: -
+> delete tree
+1
+> print
+Root: zebra [h=1, bf=1]
+  L: dog [h=0, bf=0]
+    L: -
+    R: -
+  R: -
+> delete zebra
+1
+> print
+Root: dog [h=0, bf=0]
+  L: -
+  R: -
+> delete dog
+1
+> print
+(empty)
+> walk
+> delete dog
+0
+> insert Car
+0
+> insert car
+1
+> search CAR
+1
+> walk
+car
+> delete cAr
+1
+> search car
+0
+> delete CAR
+0
+> search Car
+0
+> print
+(empty)
+> insert car2
+Enter one English word using letters A-Z only.
+> oops
+Invalid command. Use search/insert/delete WORD, walk, print, or quit.
+> insert c
+0
+> insert b
+0
+> insert a
+0
+> print
+Root: b [h=1, bf=0]
+  L: a [h=0, bf=0]
+    L: -
+    R: -
+  R: c [h=0, bf=0]
+    L: -
+    R: -
+> walk
+a
+b
+c
+> delete a
+1
+> delete b
+1
+> delete c
+1
+> print
+(empty)
+> insert a
+0
+> insert b
+0
+> insert c
+0
+> print
+Root: b [h=1, bf=0]
+  L: a [h=0, bf=0]
+    L: -
+    R: -
+  R: c [h=0, bf=0]
+    L: -
+    R: -
+> walk
+a
+b
+c
+> delete a
+1
+> delete b
+1
+> delete c
+1
+> print
+(empty)
+> insert c
+0
+> insert a
+0
+> insert b
+0
+> print
+Root: b [h=1, bf=0]
+  L: a [h=0, bf=0]
+    L: -
+    R: -
+  R: c [h=0, bf=0]
+    L: -
+    R: -
+> walk
+a
+b
+c
+> delete a
+1
+> delete b
+1
+> delete c
+1
+> print
+(empty)
+> insert a
+0
+> insert c
+0
+> insert b
+0
+> print
+Root: b [h=1, bf=0]
+  L: a [h=0, bf=0]
+    L: -
+    R: -
+  R: c [h=0, bf=0]
+    L: -
+    R: -
+> walk
+a
+b
+c
+> delete a
+1
+> delete b
+1
+> delete c
+1
+> print
+(empty)
+> insert d
+0
+> insert b
+0
+> insert e
+0
+> insert a
+0
+> insert c
+0
+> print
+Root: d [h=2, bf=1]
+  L: b [h=1, bf=0]
+    L: a [h=0, bf=0]
+      L: -
+      R: -
+    R: c [h=0, bf=0]
+      L: -
+      R: -
+  R: e [h=0, bf=0]
+    L: -
+    R: -
+> delete e
+1
+> print
+Root: b [h=2, bf=-1]
+  L: a [h=0, bf=0]
+    L: -
+    R: -
+  R: d [h=1, bf=1]
+    L: c [h=0, bf=0]
+      L: -
+      R: -
+    R: -
+> walk
+a
+b
+c
+d
+> delete a
+1
+> delete b
+1
+> delete c
+1
+> delete d
+1
+> print
+(empty)
+> insert b
+0
+> insert a
+0
+> insert d
+0
+> insert c
+0
+> insert e
+0
+> print
+Root: b [h=2, bf=-1]
+  L: a [h=0, bf=0]
+    L: -
+    R: -
+  R: d [h=1, bf=0]
+    L: c [h=0, bf=0]
+      L: -
+      R: -
+    R: e [h=0, bf=0]
+      L: -
+      R: -
+> delete a
+1
+> print
+Root: d [h=2, bf=1]
+  L: b [h=1, bf=-1]
+    L: -
+    R: c [h=0, bf=0]
+      L: -
+      R: -
+  R: e [h=0, bf=0]
+    L: -
+    R: -
+> walk
+b
+c
+d
+e
+> delete b
+1
+> delete c
+1
+> delete d
+1
+> delete e
+1
+> print
+(empty)
+> insert j
+0
+> insert a
+0
+> insert b
+0
+> insert l
+0
+> insert e
+0
+> insert h
+0
+> insert g
+0
+> insert d
+0
+> insert k
+0
+> insert i
+0
+> insert f
+0
+> insert c
+0
+> print
+Root: h [h=4, bf=1]
+  L: e [h=3, bf=1]
+    L: b [h=2, bf=-1]
+      L: a [h=0, bf=0]
+        L: -
+        R: -
+      R: d [h=1, bf=1]
+        L: c [h=0, bf=0]
+          L: -
+          R: -
+        R: -
+    R: g [h=1, bf=1]
+      L: f [h=0, bf=0]
+        L: -
+        R: -
+      R: -
+  R: j [h=2, bf=-1]
+    L: i [h=0, bf=0]
+      L: -
+      R: -
+    R: l [h=1, bf=1]
+      L: k [h=0, bf=0]
+        L: -
+        R: -
+      R: -
+> delete h
+1
+> print
+Root: e [h=3, bf=0]
+  L: b [h=2, bf=-1]
+    L: a [h=0, bf=0]
+      L: -
+      R: -
+    R: d [h=1, bf=1]
+      L: c [h=0, bf=0]
+        L: -
+        R: -
+      R: -
+  R: i [h=2, bf=0]
+    L: g [h=1, bf=1]
+      L: f [h=0, bf=0]
+        L: -
+        R: -
+      R: -
+    R: k [h=1, bf=0]
+      L: j [h=0, bf=0]
+        L: -
+        R: -
+      R: l [h=0, bf=0]
+        L: -
+        R: -
+> walk
+a
+b
+c
+d
+e
+f
+g
+i
+j
+k
+l
+> delete a
+1
+> delete b
+1
+> delete c
+1
+> delete d
+1
+> delete e
+1
+> delete f
+1
+> delete g
+1
+> delete i
+1
+> delete j
+1
+> delete k
+1
+> delete l
+1
+> print
+(empty)
+> walk
+> search missing
+0
+> delete missing
+0
+> quit
+Goodbye.
