@@ -1,0 +1,6 @@
+RESULT 0 hello '' ''
+RESULT 0 53965 'rify_test_label$\nhost : 127.0.0.1\nport : 62411\n\n\nFrom TSH :\n\nstatus : 1\nerror : 400\n\nname : verify_test_label\npriority : 1\nlength : 6\ntuple : hello\n\n\n\n\t\t\t---------\n\t\t\tMAIN MENU\n\t\t\t---------\n\n\t\t\t 1. Put\n\t\t\t 2. Get\n\t\t\t 3. Read\n\t\t\t 4. Exit (TSH)\n\t\t\t 5. Shell\n\t\t\t 6. Quit from this program\n\t\t\t 7. PS - list daemon jobs\n\t\t\t 8. KILL - stop one job\n\t\t\t 9. KILLALL - stop all daemon jobs\n\n\n\t\t\tEnter Choice : ' ''
+RESULT 0 ^verify_test_label$ 'hello\x00' ''
+RESULT 0 53965 'iority : Enter length : Enter tuple : \n\nTo TSH :\n\nname : verify_newput\npriority : 1\nlength : 16\ntuple : world\n\n\n\nFrom TSH :\n\nstatus : 1\nerror : 400\n\n\n\n\t\t\t---------\n\t\t\tMAIN MENU\n\t\t\t---------\n\n\t\t\t 1. Put\n\t\t\t 2. Get\n\t\t\t 3. Read\n\t\t\t 4. Exit (TSH)\n\t\t\t 5. Shell\n\t\t\t 6. Quit from this program\n\t\t\t 7. PS - list daemon jobs\n\t\t\t 8. KILL - stop one job\n\t\t\t 9. KILLALL - stop all daemon jobs\n\n\n\t\t\tEnter Choice : ' ''
+RESULT 0 ^verify_newput$ 'world\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00' ''
+PASS READ label, tuple retention, interactive PUT

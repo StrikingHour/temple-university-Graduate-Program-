@@ -1,0 +1,12 @@
+PASS foreground exit status, missing executable, pipe/redirection
+PASS background, PS, KILL and unknown PID rejection
+PASS KILLALL and child reaping
+PASS PUT, repeated READ, destructive GET and pending GET callback
+PASS pending READ retains tuple for subsequent GET
+PASS launcher invalid count and missing executable
+PASS matrix N=8 G=2 P=4 full verification
+PASS matrix N=7 G=3 P=3 full verification
+PASS matrix N=5 G=5 P=4 full verification
+PASS matrix N=256 G=17 P=4 full verification
+PASS all matrix workers completed
+PASS interactive tester PS/quit menu smoke

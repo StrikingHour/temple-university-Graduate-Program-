@@ -1,0 +1,5 @@
+make: Entering directory '/workspace/scratch/49471f128d44/review/lab4/tools'
+gcc -I../include -Wall -Wextra -std=c11 -g -o tshctl tshctl.c -L../obj -lsng
+gcc -I../include -Wall -Wextra -std=c11 -g -o launch launch.c -L../obj -lsng
+gcc -Wall -Wextra -std=c11 -g -o demo_worker demo_worker.c
+make: Leaving directory '/workspace/scratch/49471f128d44/review/lab4/tools'

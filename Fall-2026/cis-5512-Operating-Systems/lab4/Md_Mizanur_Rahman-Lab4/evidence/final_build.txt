@@ -1,0 +1,66 @@
+make: Entering directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4'
+make -B -C netlib
+make[1]: Entering directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/netlib'
+gcc -I../include -O3 -Wall -Wextra -c netlib.c -o netlib.o
+netlib.c: In function ‘bind_socket’:
+netlib.c:77:50: warning: pointer targets in passing argument 3 of ‘getsockname’ differ in signedness [-Wpointer-sign]
+   77 |    if (getsockname(sd, (struct sockaddr *)&self, &self_len) == -1)
+      |                                                  ^~~~~~~~~
+      |                                                  |
+      |                                                  int *
+In file included from ../include/synergy.h:18,
+                 from netlib.c:5:
+/usr/include/x86_64-linux-gnu/sys/socket.h:117:47: note: expected ‘socklen_t * restrict’ {aka ‘unsigned int * restrict’} but argument is of type ‘int *’
+  117 |                         socklen_t *__restrict __len) __THROW;
+      |                         ~~~~~~~~~~~~~~~~~~~~~~^~~~~
+netlib.c: In function ‘get_connection’:
+netlib.c:108:52: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+  108 |        sd = accept(sock, (struct sockaddr *)&peer, &peerlen) ;
+      |                                                    ^~~~~~~~
+      |                                                    |
+      |                                                    int *
+/usr/include/x86_64-linux-gnu/sys/socket.h:307:42: note: expected ‘socklen_t * restrict’ {aka ‘unsigned int * restrict’} but argument is of type ‘int *’
+  307 |                    socklen_t *__restrict __addr_len);
+      |                    ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+netlib.c: In function ‘sng_gethostid’:
+netlib.c:215:18: warning: unused variable ‘hostid’ [-Wunused-variable]
+  215 |   struct in_addr hostid ;
+      |                  ^~~~~~
+gcc -I../include -O3 -Wall -Wextra -c wall_clock.c -o wall_clock.o
+gcc -I../include -O3 -Wall -Wextra -std=c11 -c tshlib.c -o tshlib.o
+gcc -I../include -O3 -Wall -Wextra -c tuplelib.c -o tuplelib.o
+mkdir -p ../obj
+ar rcs ../obj/libsng.a netlib.o wall_clock.o tshlib.o tuplelib.o
+make[1]: Leaving directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/netlib'
+make -B -C tsh
+make[1]: Entering directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/tsh'
+gcc -I../include -g -Wall -Wextra -o tsh tsh.c shell_service.c -L../obj -lsng
+tsh.c: In function ‘OpGet’:
+tsh.c:208:19: warning: comparison of integer expressions of different signedness: ‘u_long’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  208 |    if ((s->length > request_len) && (request_len != 0))
+      |                   ^
+gcc -I../include -g -Wall -Wextra -o tshtest tshtest.c -L../obj -lsng
+tshtest.c: In function ‘OpPut’:
+tshtest.c:125:16: warning: variable ‘st’ set but not used [-Wunused-but-set-variable]
+  125 |    char *buff,*st ;
+      |                ^~
+tshtest.c: In function ‘connectTsh’:
+tshtest.c:292:20: warning: unused variable ‘host’ [-Wunused-variable]
+  292 |    struct hostent *host ;
+      |                    ^~~~
+gcc -std=c11 -g -Wall -Wextra -o myshell myshell.c
+make[1]: Leaving directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/tsh'
+make -B -C tools
+make[1]: Entering directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/tools'
+gcc -I../include -Wall -Wextra -std=c11 -g -o tshctl tshctl.c -L../obj -lsng
+gcc -I../include -Wall -Wextra -std=c11 -g -o launch launch.c -L../obj -lsng
+gcc -Wall -Wextra -std=c11 -g -o demo_worker demo_worker.c
+make[1]: Leaving directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/tools'
+make -B -C matrix
+make[1]: Entering directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/matrix'
+gcc -I../include -O3 -Wall -Wextra -std=c11 client.c ../obj/libsng.a -lm -o client
+gcc -I../include -O3 -Wall -Wextra -std=c11 worker.c ../obj/libsng.a -lm -o worker
+gcc -O3 -Wall -Wextra -std=c11 seq_kij.c -lm -o seq_kij
+gcc -O3 -Wall -Wextra -std=c11 -DBASELINE_IKJ seq_kij.c -lm -o seq_ikj
+make[1]: Leaving directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4/matrix'
+make: Leaving directory '/workspace/scratch/49471f128d44/submission/Md_Mizanur_Rahman-Lab4'

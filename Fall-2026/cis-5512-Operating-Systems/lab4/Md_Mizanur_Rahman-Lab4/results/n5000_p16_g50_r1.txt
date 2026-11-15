@@ -1,0 +1,18 @@
+worker PID=221825 stripes=6 compute=31.285308 s
+worker PID=221819 stripes=5 compute=29.773617 s
+worker PID=221817 stripes=6 compute=31.996442 s
+worker PID=221801 stripes=6 compute=33.868321 s
+worker PID=221821 stripes=6 compute=32.681679 s
+worker PID=221813 stripes=6 compute=32.993185 s
+worker PID=221805 stripes=7 compute=34.522215 s
+worker PID=221829 stripes=6 compute=33.501905 s
+worker PID=221823 stripes=6 compute=31.810709 s
+worker PID=221830 stripes=6 compute=31.847847 s
+worker PID=221815 stripes=6 compute=31.814520 s
+worker PID=221803 stripes=7 compute=35.386806 s
+worker PID=221811 stripes=6 compute=32.278319 s
+worker PID=221809 stripes=7 compute=35.717343 s
+worker PID=221807 stripes=7 compute=35.750733 s
+worker PID=221799 stripes=7 compute=36.159357 s
+N=5000 G=50 P=16 stripes=100 parallel_seconds=37.419787
+Verification: PASS (sampled, 100 cells, max_abs_error=0)

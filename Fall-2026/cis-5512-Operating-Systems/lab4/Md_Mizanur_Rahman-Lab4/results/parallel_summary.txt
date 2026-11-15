@@ -1,0 +1,42 @@
+results/n5000_p16_g100_r1.txt:N=5000 G=100 P=16 stripes=50 parallel_seconds=36.782086
+results/n5000_p16_g100_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g100_r2.txt:N=5000 G=100 P=16 stripes=50 parallel_seconds=37.763539
+results/n5000_p16_g100_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g100_r3.txt:N=5000 G=100 P=16 stripes=50 parallel_seconds=37.664774
+results/n5000_p16_g100_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g200_r1.txt:N=5000 G=200 P=16 stripes=25 parallel_seconds=36.229048
+results/n5000_p16_g200_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g200_r2.txt:N=5000 G=200 P=16 stripes=25 parallel_seconds=38.785896
+results/n5000_p16_g200_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g200_r3.txt:N=5000 G=200 P=16 stripes=25 parallel_seconds=37.311722
+results/n5000_p16_g200_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g312_r1.txt:N=5000 G=312 P=16 stripes=17 parallel_seconds=36.569002
+results/n5000_p16_g312_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g312_r2.txt:N=5000 G=312 P=16 stripes=17 parallel_seconds=36.940105
+results/n5000_p16_g312_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g312_r3.txt:N=5000 G=312 P=16 stripes=17 parallel_seconds=36.902518
+results/n5000_p16_g312_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g313_r1.txt:N=5000 G=313 P=16 stripes=16 parallel_seconds=35.054852
+results/n5000_p16_g313_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g313_r2.txt:N=5000 G=313 P=16 stripes=16 parallel_seconds=36.552924
+results/n5000_p16_g313_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g313_r3.txt:N=5000 G=313 P=16 stripes=16 parallel_seconds=36.758513
+results/n5000_p16_g313_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g314_r1.txt:N=5000 G=314 P=16 stripes=16 parallel_seconds=36.899503
+results/n5000_p16_g314_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g314_r2.txt:N=5000 G=314 P=16 stripes=16 parallel_seconds=37.043324
+results/n5000_p16_g314_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g314_r3.txt:N=5000 G=314 P=16 stripes=16 parallel_seconds=36.612492
+results/n5000_p16_g314_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g50_r1.txt:N=5000 G=50 P=16 stripes=100 parallel_seconds=37.419787
+results/n5000_p16_g50_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g50_r2.txt:N=5000 G=50 P=16 stripes=100 parallel_seconds=36.430680
+results/n5000_p16_g50_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g50_r3.txt:N=5000 G=50 P=16 stripes=100 parallel_seconds=36.866053
+results/n5000_p16_g50_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g625_r1.txt:N=5000 G=625 P=16 stripes=8 parallel_seconds=37.469178
+results/n5000_p16_g625_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g625_r2.txt:N=5000 G=625 P=16 stripes=8 parallel_seconds=36.734554
+results/n5000_p16_g625_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+results/n5000_p16_g625_r3.txt:N=5000 G=625 P=16 stripes=8 parallel_seconds=39.071390
+results/n5000_p16_g625_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)

@@ -1,0 +1,6 @@
+worker PID=221182 stripes=4 compute=0.004041 s
+worker PID=221183 stripes=4 compute=0.004102 s
+worker PID=221184 stripes=4 compute=0.003736 s
+worker PID=221185 stripes=4 compute=0.002660 s
+N=256 G=17 P=4 stripes=16 parallel_seconds=0.046378
+Verification: PASS (full, 65536 cells, max_abs_error=0)

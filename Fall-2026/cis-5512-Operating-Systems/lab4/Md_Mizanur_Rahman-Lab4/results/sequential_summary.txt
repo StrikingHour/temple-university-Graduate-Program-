@@ -1,0 +1,18 @@
+seq_ikj_n5000_r1.txt:N=5000 order=ikj sequential_seconds=125.330936
+seq_ikj_n5000_r1.txt:checksum=3125109885182
+seq_ikj_n5000_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+seq_ikj_n5000_r2.txt:N=5000 order=ikj sequential_seconds=129.484884
+seq_ikj_n5000_r2.txt:checksum=3125109885182
+seq_ikj_n5000_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+seq_ikj_n5000_r3.txt:N=5000 order=ikj sequential_seconds=124.708530
+seq_ikj_n5000_r3.txt:checksum=3125109885182
+seq_ikj_n5000_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+seq_kij_n5000_r1.txt:N=5000 order=kij sequential_seconds=157.717328
+seq_kij_n5000_r1.txt:checksum=3125109885182
+seq_kij_n5000_r1.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+seq_kij_n5000_r2.txt:N=5000 order=kij sequential_seconds=158.504407
+seq_kij_n5000_r2.txt:checksum=3125109885182
+seq_kij_n5000_r2.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)
+seq_kij_n5000_r3.txt:N=5000 order=kij sequential_seconds=158.336964
+seq_kij_n5000_r3.txt:checksum=3125109885182
+seq_kij_n5000_r3.txt:Verification: PASS (sampled, 100 cells, max_abs_error=0)

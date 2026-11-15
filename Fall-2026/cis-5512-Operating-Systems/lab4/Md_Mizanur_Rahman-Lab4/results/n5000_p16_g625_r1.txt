@@ -1,0 +1,18 @@
+worker PID=224037 stripes=0 compute=0.000000 s
+worker PID=224039 stripes=0 compute=0.000000 s
+worker PID=224046 stripes=0 compute=0.000000 s
+worker PID=224031 stripes=0 compute=0.000000 s
+worker PID=224021 stripes=0 compute=0.000000 s
+worker PID=224029 stripes=0 compute=0.000000 s
+worker PID=224027 stripes=0 compute=0.000000 s
+worker PID=224033 stripes=0 compute=0.000000 s
+worker PID=224023 stripes=1 compute=33.367258 s
+worker PID=224015 stripes=1 compute=33.737557 s
+worker PID=224017 stripes=1 compute=33.696680 s
+worker PID=224019 stripes=1 compute=33.778073 s
+worker PID=224025 stripes=1 compute=33.199384 s
+worker PID=224035 stripes=1 compute=32.974776 s
+worker PID=224045 stripes=1 compute=33.547931 s
+worker PID=224041 stripes=1 compute=33.868073 s
+N=5000 G=625 P=16 stripes=8 parallel_seconds=37.469178
+Verification: PASS (sampled, 100 cells, max_abs_error=0)

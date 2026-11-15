@@ -1,0 +1,4 @@
+make: Entering directory '/workspace/scratch/49471f128d44/review/lab4/matrix'
+gcc -I../include -O3 -Wall -Wextra -std=c11 client.c ../obj/libsng.a -lm -o client
+gcc -I../include -O3 -Wall -Wextra -std=c11 worker.c ../obj/libsng.a -lm -o worker
+make: Leaving directory '/workspace/scratch/49471f128d44/review/lab4/matrix'

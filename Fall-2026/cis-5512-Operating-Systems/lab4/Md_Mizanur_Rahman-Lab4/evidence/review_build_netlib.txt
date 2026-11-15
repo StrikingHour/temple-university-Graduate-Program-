@@ -1,0 +1,32 @@
+make: Entering directory '/workspace/scratch/49471f128d44/review/lab4/netlib'
+gcc -I../include -O3 -Wall -Wextra -c netlib.c -o netlib.o
+gcc -I../include -O3 -Wall -Wextra -c wall_clock.c -o wall_clock.o
+gcc -I../include -O3 -Wall -Wextra -std=c11 -c tshlib.c -o tshlib.o
+gcc -I../include -O3 -Wall -Wextra -c tuplelib.c -o tuplelib.o
+mkdir -p ../obj
+ar rcs ../obj/libsng.a netlib.o wall_clock.o tshlib.o tuplelib.o
+make: Leaving directory '/workspace/scratch/49471f128d44/review/lab4/netlib'
+netlib.c: In function ‘bind_socket’:
+netlib.c:77:50: warning: pointer targets in passing argument 3 of ‘getsockname’ differ in signedness [-Wpointer-sign]
+   77 |    if (getsockname(sd, (struct sockaddr *)&self, &self_len) == -1)
+      |                                                  ^~~~~~~~~
+      |                                                  |
+      |                                                  int *
+In file included from ../include/synergy.h:18,
+                 from netlib.c:5:
+/usr/include/x86_64-linux-gnu/sys/socket.h:117:47: note: expected ‘socklen_t * restrict’ {aka ‘unsigned int * restrict’} but argument is of type ‘int *’
+  117 |                         socklen_t *__restrict __len) __THROW;
+      |                         ~~~~~~~~~~~~~~~~~~~~~~^~~~~
+netlib.c: In function ‘get_connection’:
+netlib.c:108:52: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+  108 |        sd = accept(sock, (struct sockaddr *)&peer, &peerlen) ;
+      |                                                    ^~~~~~~~
+      |                                                    |
+      |                                                    int *
+/usr/include/x86_64-linux-gnu/sys/socket.h:307:42: note: expected ‘socklen_t * restrict’ {aka ‘unsigned int * restrict’} but argument is of type ‘int *’
+  307 |                    socklen_t *__restrict __addr_len);
+      |                    ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+netlib.c: In function ‘sng_gethostid’:
+netlib.c:215:18: warning: unused variable ‘hostid’ [-Wunused-variable]
+  215 |   struct in_addr hostid ;
+      |                  ^~~~~~

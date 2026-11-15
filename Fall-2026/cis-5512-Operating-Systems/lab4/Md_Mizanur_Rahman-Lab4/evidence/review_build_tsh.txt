@@ -1,0 +1,17 @@
+make: Entering directory '/workspace/scratch/49471f128d44/review/lab4/tsh'
+gcc -I../include -g -Wall -Wextra -o tsh tsh.c shell_service.c -L../obj -lsng
+gcc -I../include -g -Wall -Wextra -o tshtest tshtest.c -L../obj -lsng
+gcc -std=c11 -g -Wall -Wextra -o myshell myshell.c
+make: Leaving directory '/workspace/scratch/49471f128d44/review/lab4/tsh'
+tsh.c: In function ‘OpGet’:
+tsh.c:208:19: warning: comparison of integer expressions of different signedness: ‘u_long’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  208 |    if ((s->length > request_len) && (request_len != 0))
+      |                   ^
+tshtest.c: In function ‘OpPut’:
+tshtest.c:125:16: warning: variable ‘st’ set but not used [-Wunused-but-set-variable]
+  125 |    char *buff,*st ;
+      |                ^~
+tshtest.c: In function ‘connectTsh’:
+tshtest.c:292:20: warning: unused variable ‘host’ [-Wunused-variable]
+  292 |    struct hostent *host ;
+      |                    ^~~~
