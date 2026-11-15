@@ -1,0 +1,153 @@
+PS C:\Users\rahma\Documents\temple-university-Graduate-Program-\Fall-2026\cis-5511-Programming-Techniques\Assignment5> python .\word_bst.py
+Commands: search WORD | insert WORD | delete WORD | walk | print | quit
+> print
+(empty)
+> walk
+> search car
+0
+> delete car
+0
+> insert mango
+0
+> insert car
+0
+> insert tree
+0
+> insert apple
+0
+> insert dog
+0
+> insert sun
+0
+> insert zebra
+0
+> insert sun
+1
+> insert car
+1
+> search car
+2
+> search pear
+0
+> print
+Root: mango(1)
+  L: car(2)
+    L: apple(1)
+      L: -
+      R: -
+    R: dog(1)
+      L: -
+      R: -
+  R: tree(1)
+    L: sun(2)
+      L: -
+      R: -
+    R: zebra(1)
+      L: -
+      R: -
+> walk
+apple(1)
+car(2)
+dog(1)
+mango(1)
+sun(2)
+tree(1)
+zebra(1)
+> delete car
+2
+> search car
+1
+> delete apple
+1
+> delete car
+1
+> print
+Root: mango(1)
+  L: dog(1)
+    L: -
+    R: -
+  R: tree(1)
+    L: sun(2)
+      L: -
+      R: -
+    R: zebra(1)
+      L: -
+      R: -
+> delete mango
+1
+> search mango
+0
+> search sun
+2
+> print
+Root: sun(2)
+  L: dog(1)
+    L: -
+    R: -
+  R: tree(1)
+    L: -
+    R: zebra(1)
+      L: -
+      R: -
+> walk
+dog(1)
+sun(2)
+tree(1)
+zebra(1)
+> delete sun
+2
+> delete sun
+1
+> print
+Root: tree(1)
+  L: dog(1)
+    L: -
+    R: -
+  R: zebra(1)
+    L: -
+    R: -
+> delete tree
+1
+> print
+Root: zebra(1)
+  L: dog(1)
+    L: -
+    R: -
+  R: -
+> delete zebra
+1
+> print
+Root: dog(1)
+  L: -
+  R: -
+> delete dog
+1
+> print
+(empty)
+> walk
+> delete dog
+0
+> insert Car
+0
+> insert car
+1
+> search CAR
+2
+> walk
+car(2)
+> delete cAr
+2
+> search car
+1
+> delete CAR
+1
+> search Car
+0
+> print
+(empty)
+> insert car2
+Enter one English word using letters A-Z only.
+> oops
+Invalid command. Use search/insert/delete WORD, walk, print, or quit.
+> quit
+Goodbye.

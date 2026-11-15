@@ -1,0 +1,198 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=0.86in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,array,enumitem,fancyhdr,hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true,urlcolor=blue!55!black,linkcolor=black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist{itemsep=1pt,topsep=3pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Homework 8}
+\fancyhead[C]{CIS 5511}
+\fancyhead[R]{Md. Mizanur Rahman}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+  {\large CIS 5511 -- Homework 8}\\[3pt]
+  Md. Mizanur Rahman\\[-1pt]
+  \texttt{md.mizanur.rahman@temple.edu}
+\end{center}
+\vspace{6pt}
+{\large\bfseries Longest Common Substring Using Dynamic Programming}\par
+
+\section*{1. Data structure and recursive formulation}
+Let $X=x_1x_2\cdots x_n$ and $Y=y_1y_2\cdots y_m$ be two strings.
+A \emph{substring} is a contiguous block of characters. The dynamic programming
+table $D$ has $(n+1)$ rows and $(m+1)$ columns, where
+\[
+ D[i,j]=\text{length of the longest common \emph{suffix} of }
+ X[1\ldots i]\text{ and }Y[1\ldots j].
+\]
+This suffix-based state enforces contiguity: only matches that end at positions
+$i$ and $j$ can be extended. The recurrence is
+\[
+ D[i,j]=\begin{cases}
+ 0, & i=0\text{ or }j=0,\\
+ D[i-1,j-1]+1, & i,j>0\text{ and }x_i=y_j,\\
+ 0, & i,j>0\text{ and }x_i\ne y_j.
+ \end{cases}
+\]
+The solution length is $L=\max_{0\leq i\leq n,\,0\leq j\leq m}D[i,j]$.
+For a maximizing cell $(i^*,j^*)$, the answer is the $L$ characters ending at
+$i^*$ in $X$ (equivalently, at $j^*$ in $Y$). The implementation saves $L$
+and the two zero-based start indices. For multiple optimal substrings it
+selects the earliest start in $X$, breaking further ties by earliest start in
+$Y$. If $L=0$, the substring is empty and both positions are \code{None}.
+
+\textbf{Difference from the Longest Common Subsequence (LCS).}
+Both problems compare two prefixes and reuse solutions to smaller subproblems
+in a two-dimensional DP table. However, an LCS may skip characters, while an
+LCStr must use consecutive characters in both strings. The usual LCS state
+$C[i,j]$ is the best \emph{subsequence length anywhere} in the two prefixes:
+\[
+ C[i,j]=\begin{cases}
+ 0, & i=0\text{ or }j=0,\\
+ C[i-1,j-1]+1, & x_i=y_j,\\
+ \max\{C[i-1,j],C[i,j-1]\}, & x_i\ne y_j.
+ \end{cases}
+\]
+Thus LCS carries forward the best answer when characters differ and returns
+$C[n,m]$. LCStr resets a mismatched cell to zero and returns the \emph{maximum
+over all cells} of $D$, not necessarily $D[n,m]$. For example,
+$X=\code{ABCDEF}$ and $Y=\code{ACE}$ have LCS \code{ACE} (length $3$),
+but LCStr \code{A} (length $1$; \code{C} and \code{E} are also optimal).
+
+\section*{2. Dynamic programming algorithm}
+The implemented \code{longest\_common\_substring(x,y)} uses the following
+bottom-up pseudocode in the textbook's numbered-line format. Characters of
+$X$ and $Y$ are indexed from $1$; row $0$ and column $0$ of $D$ represent
+empty prefixes. The returned start positions are zero-based to agree with
+the Python implementation and the submitted testing output.
+
+\begingroup\small
+\begin{verbatim}
+LONGEST-COMMON-SUBSTRING(X, Y)
+
+ 1  n = X.length
+ 2  m = Y.length
+ 3  D = new array[0:n, 0:m]
+
+ 4  for i = 0 to n
+ 5      D[i, 0] = 0
+ 6  for j = 0 to m
+ 7      D[0, j] = 0
+
+ 8  maxLength = 0
+ 9  endX = 0
+10  endY = 0
+
+11  for i = 1 to n
+12      for j = 1 to m
+13          if X[i] == Y[j]
+14              D[i, j] = D[i-1, j-1] + 1
+15              if D[i, j] > maxLength
+16                  maxLength = D[i, j]
+17                  endX = i
+18                  endY = j
+19          else
+20              D[i, j] = 0
+
+21  if maxLength == 0
+22      return ("", 0, NIL, NIL, D)
+
+23  startX = endX - maxLength
+24  startY = endY - maxLength
+25  substring = X[startX+1:endX]
+26  return (substring, maxLength, startX, startY, D)
+\end{verbatim}
+\endgroup
+
+The assignment symbol is \code{=}, while equality is tested with
+\code{==}. The subarray notation on line 25 includes both endpoints.
+The table is traversed in increasing $i$, then increasing $j$. Since lines
+15--18 update the answer only when a \emph{strictly longer} substring is found,
+ties retain the earliest starting position in $X$, followed by the earliest
+starting position in $Y$. This agrees with the Python program's tie-breaking.
+
+\textbf{Correctness.} The zero row/column are correct for empty prefixes.
+For $i,j>0$, unequal final characters cannot terminate a common nonempty
+substring, so the correct suffix length is $0$. Equal final characters extend
+the longest common suffix of the immediately preceding prefixes by one.
+Induction over the table therefore establishes every $D[i,j]$; taking its
+maximum finds the globally longest common substring.
+
+\section*{3. Time and space analysis}
+Initialization uses $(n+1)(m+1)$ zero entries. Each of the $nm$ inner-loop
+iterations performs a comparison, a constant number of table accesses, and
+constant-time best-position updates. Therefore the DP computation takes
+$\Theta((n+1)(m+1))$ time and space, customarily stated as
+$\boxed{\Theta(nm)}$ for nonempty strings. Extracting the returned substring
+costs at most $O(\min(n,m))$ time and space, which does not change the overall
+bound. The full table is retained because the assignment asks for its contents.
+If only the result were required, two rows (or one carefully updated row) could
+reduce DP workspace to $O(\min(n,m))$.
+
+\section*{4. Implementation and testing results}
+The Python implementation is submitted as \code{lcstr.py} and uses no external
+packages. Run \code{python lcstr.py} to execute all seven cases and print the
+input, the result, the two starting positions, and \emph{every cell} of the DP
+table. The exact console transcript is supplied separately in
+\code{lcstr\_output.txt}; \code{python lcstr.py --save} regenerates it.
+Each case also checks the DP recurrence and the reconstructed answer.
+
+\begin{center}
+\small
+\begin{tabular}{@{}c l l l c l@{}}
+\toprule
+Case & $X$ & $Y$ & Chosen LCStr & Length & Starts $(X,Y)$\\
+\midrule
+1 & \code{ABABC} & \code{BABCA} & \code{BABC} & 4 & $(1,0)$\\
+2 & \code{ABCDEF} & \code{ACE} & \code{A} & 1 & $(0,0)$\\
+3 & \code{BANANA} & \code{ANANAS} & \code{ANANA} & 5 & $(1,0)$\\
+4 & \code{ABABA} & \code{BABAB} & \code{ABAB} & 4 & $(0,1)$\\
+5 & \code{ABC} & \code{XYZ} & empty & 0 & $(-,-)$\\
+6 & empty & \code{DATA} & empty & 0 & $(-,-)$\\
+7 & \code{NETWORK} & \code{NETWORK} & \code{NETWORK} & 7 & $(0,0)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For illustration, the complete table for Case 2 is shown below. Every
+nonzero entry equals $1$ because no two matching characters are adjacent in
+both strings; the longest common \emph{subsequence}, in contrast, has length $3$.
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{c|rrrr}
+ $D[i,j]$ & $-$ & A & C & E\\\hline
+ $-$ & 0 & 0 & 0 & 0\\
+ A & 0 & 1 & 0 & 0\\
+ B & 0 & 0 & 0 & 0\\
+ C & 0 & 0 & 1 & 0\\
+ D & 0 & 0 & 0 & 0\\
+ E & 0 & 0 & 0 & 1\\
+ F & 0 & 0 & 0 & 0
+\end{tabular}
+\end{center}
+All seven test cases passed. The separate output file contains the complete
+$(|X|+1)\times(|Y|+1)$ table for \emph{every} case, including the empty-input
+case and ties between multiple longest substrings.
+
+\section*{Files and acknowledgment}
+The submission consists of three files:
+\code{PT\_08.pdf} (this report), \code{lcstr.py} (source code), and
+\code{lcstr\_output.txt} (complete inputs, outputs, and DP tables).
+The design follows the dynamic programming and LCS concepts in
+\href{https://cis.temple.edu/~pwang/5511-PT/Lecture/5511-10.htm}{Professor Wang's Lecture 10}.
+
+\textbf{AI Use Acknowledgment.} Generative AI (ChatGPT) assisted with Python
+implementation, testing, and LaTeX report preparation.
+\end{document}

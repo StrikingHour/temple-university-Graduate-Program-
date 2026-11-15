@@ -1,0 +1,177 @@
+% Adapted to match the CIS 5511 PT_06 report format provided by the student.
+% Compile with: pdflatex PT_07.tex (twice). Keep cisXXX.cls beside this file,
+% if the course class is available.
+\IfFileExists{cisXXX.cls}{
+  \documentclass{cisXXX}
+}{
+  \documentclass[11pt]{article}
+  \usepackage[margin=1in]{geometry}
+  \newcommand{\HWauthor}[2]{\author{#1\\\texttt{#2}}}
+  \newcommand{\HWno}[1]{\title{CIS 5511 --- Homework #1\\Order-$m$ B-Tree of Integers}}
+  \newcommand{\HWcourse}[1]{}
+}
+\HWauthor{Md. Mizanur Rahman}{md.mizanur.rahman@temple.edu}
+\HWno{7}
+\HWcourse{CIS 5511}
+\date{}
+\usepackage{amsmath,amssymb,array,booktabs,listings,hyperref,tikz}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=black}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,
+ keepspaces=true,showstringspaces=false,frame=single,tabsize=4}
+\setlength{\emergencystretch}{3em}
+\linespread{0.98}
+
+\begin{document}
+\maketitle
+\section*{Order-$m$ B-Tree of Integers}
+
+\subsection*{A. Design: representation and invariants}
+An order-$m$ B-tree is implemented to store distinct integers, where the order
+$m$ is specified when the tree is created. Following Lecture 09, $m$ denotes
+the \emph{maximum number of children} of an internal node, not the minimum
+degree. Each node therefore stores at most $m-1$ sorted keys. Except for the
+root, every node stores at least $\lceil m/2\rceil-1$ keys. An internal node
+containing $k$ keys has exactly $k+1$ ordered child references. All leaves
+occur at the same depth, and each child's keys fall strictly between the
+appropriate adjacent separator keys in its parent. The root is allowed to have
+fewer keys than a non-root node. An empty B-tree is represented by an empty
+root leaf.
+
+\paragraph{Node representation.}
+The class \texttt{BTreeNode} contains the following variables and method:
+\begin{center}
+\begin{tabular}{@{}p{0.27\linewidth}p{0.64\linewidth}@{}}
+\toprule
+Variable / method & Meaning \\
+\midrule
+\texttt{keys} & Sorted list of integer keys in the node.\\
+\texttt{children} & Ordered list of child-node references; empty for a leaf.\\
+\texttt{is\_leaf()} & Returns whether the node has no children.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{B-tree representation.}
+The class \texttt{BTree} contains these variables:
+\begin{center}
+\begin{tabular}{@{}p{0.27\linewidth}p{0.64\linewidth}@{}}
+\toprule
+Variable & Meaning \\
+\midrule
+\texttt{m} & Order specified by \texttt{BTree(m)}; an integer at least 3.\\
+\texttt{max\_keys} & Maximum number of keys per node: $m-1$.\\
+\texttt{min\_keys} & Minimum number of keys in a non-root node: $\lceil m/2\rceil-1$.\\
+\texttt{root} & Reference to the current root node.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The required orders have the following occupancy limits:
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Order & Maximum children & Maximum keys & Minimum non-root keys\\
+\midrule
+$m=4$ & 4 & 3 & 1\\
+$m=5$ & 5 & 4 & 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Algorithms and their interfaces}
+The following method names describe the implementation. The assignment does
+not require detailed pseudocode or an algorithmic complexity analysis.
+\begin{center}
+\begin{tabular}{@{}p{0.33\linewidth}p{0.58\linewidth}@{}}
+\toprule
+Method & Main purpose\\
+\midrule
+\texttt{search(value)} & Find whether the integer occurs in the B-tree.\\
+\texttt{insert(value)} & Insert a new integer; ignore a duplicate.\\
+\texttt{\_insert(node, value)} & Insert recursively and propagate any split upward.\\
+\texttt{delete(value)} & Delete an existing integer and update the root if needed.\\
+\texttt{\_delete(node, value)} & Remove a leaf key or use the in-order successor for an internal key.\\
+\texttt{\_repair\_underflow(parent, i)} & Borrow from a sibling or merge nodes after a deletion.\\
+\texttt{display()} & Print the complete structure level by level.\\
+\texttt{inorder()} & Return all stored keys in increasing order.\\
+\texttt{validate()} & Check occupancy, ordering, child counts, and equal leaf depths.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Insertion.}
+Insertion searches for the appropriate leaf, places the new integer there in
+sorted order, and splits a node if it temporarily has $m$ keys. The promoted
+separator is the key at zero-based index $\lfloor m/2\rfloor$; this selects
+the upper middle key when $m$ is even. A split may propagate upward. If the
+root splits, a new root is created and the height increases by one.
+
+\paragraph{Deletion.}
+If the key is in an internal node, its in-order successor is copied into that
+position and the successor is removed from the corresponding leaf. If a node
+falls below the minimum number of keys, the implementation first attempts
+to borrow from its right sibling, then its left sibling. If neither sibling
+has an extra key, the node is merged with a sibling through a separating
+parent key. Underflow repair may propagate upward, and an empty internal
+root is replaced by its only child. These tie-breaking choices are
+deterministic; another correct implementation may display a different valid
+B-tree.
+
+\subsection*{B. Programming and required tests}
+The executable implementation is \texttt{btree.py}. Run it using:
+\begin{lstlisting}
+python btree.py
+\end{lstlisting}
+The program automatically performs two independent tests. Each test creates
+an empty \texttt{BTree(m)}, calls \texttt{insert(i)} for $i=1,2,\ldots,20$
+one by one, displays the structure, calls \texttt{delete(i)} for
+$i=2,4,\ldots,20$ one by one, and displays the structure again. The
+sample test procedure and corresponding console output are submitted separately
+in \texttt{btree\_output.txt}; they are not duplicated in this report.
+
+\subsection*{Summary of the two tests}
+For $m=4$, each non-root node must contain 1--3 keys. For $m=5$, it must
+contain 2--4 keys. Both tests completed every required operation successfully.
+The following table summarizes the displayed trees (the root is shown in
+square brackets, and the level count includes the root level):
+\begin{center}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+Order & Insertions & Deletions & Root after insertion & Root after deletion\\
+\midrule
+$m=4$ & $1$--$20$ & $2,4,\ldots,20$ & $[9]$ (3 levels) & $[9]$ (3 levels)\\
+$m=5$ & $1$--$20$ & $2,4,\ldots,20$ & $[9]$ (3 levels) & $[5,11]$ (2 levels)\\
+\bottomrule
+\end{tabular}
+\end{center}
+After deleting the ten even integers, both trees contain exactly
+$\{1,3,5,7,9,11,13,15,17,19\}$. The complete level-by-level structures
+after insertion and deletion are provided in the separate text file.
+
+\subsection*{Validation and reproducibility}
+After each insertion and deletion, \texttt{validate()} verifies that every
+node satisfies the occupancy bound, all keys are ordered and within their
+subtree ranges, each internal node has one more child than key, and all leaves
+have equal depth. The in-order traversal is also compared with the expected
+integers. Both required tests passed. Additionally, 48,000 randomized insertions
+and 48,000 randomized deletions across orders 3 through 10 passed the same
+invariant and set-membership checks.
+
+\subsection*{Files and execution}
+The submission consists of three files: \texttt{PT\_07.pdf}, the compiled
+report describing the B-tree design and test results; \texttt{btree.py}, the
+Python implementation; and \texttt{btree\_output.txt}, containing the sample
+test procedure and corresponding outputs. This \LaTeX{} source is retained
+for editing. The course file \texttt{cisXXX.cls} may be used if available;
+otherwise the report uses the standard article class.
+
+\subsection*{Reference}
+P. Wang, \emph{CIS 5511 Programming Techniques, Lecture 09: B-trees and
+Amortized Analysis}.\\
+\url{https://cis.temple.edu/~pwang/5511-PT/Lecture/5511-09.htm}
+
+\subsection*{AI Use Acknowledgment}
+Generative AI (ChatGPT) assisted with algorithm development, Python
+implementation, testing, and LaTeX preparation.
+
+\end{document}

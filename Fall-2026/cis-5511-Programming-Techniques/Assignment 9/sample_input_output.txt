@@ -1,0 +1,103 @@
+SAMPLE INPUT AND OUTPUT
+Run: python task_scheduling.py
+Each case is a separate program run.
+
+Case 1
+Sample Input:
+2
+5 3
+
+Sample Output:
+Execution order: a2 -> a1
+Task Processing_time Completion_time
+a2 3 3
+a1 5 8
+Total completion time: 11
+Average completion time: 5.50
+
+Case 2
+Sample Input:
+5
+6 2 8 3 4
+
+Sample Output:
+Execution order: a2 -> a4 -> a5 -> a1 -> a3
+Task Processing_time Completion_time
+a2 2 2
+a4 3 5
+a5 4 9
+a1 6 15
+a3 8 23
+Total completion time: 54
+Average completion time: 10.80
+
+Case 3
+Sample Input:
+3
+4 4 2
+
+Sample Output:
+Execution order: a3 -> a1 -> a2
+Task Processing_time Completion_time
+a3 2 2
+a1 4 6
+a2 4 10
+Total completion time: 18
+Average completion time: 6.00
+
+Case 4
+Sample Input:
+1
+7
+
+Sample Output:
+Execution order: a1
+Task Processing_time Completion_time
+a1 7 7
+Total completion time: 7
+Average completion time: 7.00
+
+Case 5
+Sample Input:
+4
+1 2 3 4
+
+Sample Output:
+Execution order: a1 -> a2 -> a3 -> a4
+Task Processing_time Completion_time
+a1 1 1
+a2 2 3
+a3 3 6
+a4 4 10
+Total completion time: 20
+Average completion time: 5.00
+
+Case 6
+Sample Input:
+4
+4 3 2 1
+
+Sample Output:
+Execution order: a4 -> a3 -> a2 -> a1
+Task Processing_time Completion_time
+a4 1 1
+a3 2 3
+a2 3 6
+a1 4 10
+Total completion time: 20
+Average completion time: 5.00
+
+Case 7
+Sample Input:
+4
+0 3 0 2
+
+Sample Output:
+Execution order: a1 -> a3 -> a4 -> a2
+Task Processing_time Completion_time
+a1 0 0
+a3 0 0
+a4 2 2
+a2 3 5
+Total completion time: 7
+Average completion time: 1.75

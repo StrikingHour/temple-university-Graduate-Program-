@@ -1,0 +1,155 @@
+CIS 5511 - Programming Techniques
+Homework 8: Longest Common Substring (LCStr)
+
+TEST PROCEDURE
+Run "python lcstr.py". The nine cases below run automatically.
+Run "python lcstr.py --save" to regenerate this text file.
+Indices are zero-based. A dash labels an empty prefix in the DP table.
+The entry D[i][j] is the common-suffix length for X[:i], Y[:j].
+For ties, choose the earliest start in X, then the earliest in Y.
+
+================================================================
+CASE 1: Partial overlap
+Input X: 'ABABC'
+Input Y: 'BABCA'
+Longest common substring: 'BABC'
+Length: 4
+Start in X: 1
+Start in Y: 0
+DP table D (including zero-initialized row and column):
+     0:- 1:B 2:A 3:B 4:C 5:A
+0:-    0   0   0   0   0   0
+1:A    0   0   1   0   0   1
+2:B    0   1   0   2   0   0
+3:A    0   0   2   0   0   1
+4:B    0   1   0   3   0   0
+5:C    0   0   0   0   4   0
+
+================================================================
+CASE 2: Subsequence versus substring
+Input X: 'ABCDEF'
+Input Y: 'ACE'
+Longest common substring: 'A'
+Length: 1
+Start in X: 0
+Start in Y: 0
+DP table D (including zero-initialized row and column):
+     0:- 1:A 2:C 3:E
+0:-    0   0   0   0
+1:A    0   1   0   0
+2:B    0   0   0   0
+3:C    0   0   1   0
+4:D    0   0   0   0
+5:E    0   0   0   1
+6:F    0   0   0   0
+
+================================================================
+CASE 3: Long repeated overlap
+Input X: 'BANANA'
+Input Y: 'ANANAS'
+Longest common substring: 'ANANA'
+Length: 5
+Start in X: 1
+Start in Y: 0
+DP table D (including zero-initialized row and column):
+     0:- 1:A 2:N 3:A 4:N 5:A 6:S
+0:-    0   0   0   0   0   0   0
+1:B    0   0   0   0   0   0   0
+2:A    0   1   0   1   0   1   0
+3:N    0   0   2   0   2   0   0
+4:A    0   1   0   3   0   3   0
+5:N    0   0   2   0   4   0   0
+6:A    0   1   0   3   0   5   0
+
+================================================================
+CASE 4: Multiple optimal substrings
+Input X: 'ABABA'
+Input Y: 'BABAB'
+Longest common substring: 'ABAB'
+Length: 4
+Start in X: 0
+Start in Y: 1
+DP table D (including zero-initialized row and column):
+     0:- 1:B 2:A 3:B 4:A 5:B
+0:-    0   0   0   0   0   0
+1:A    0   0   1   0   1   0
+2:B    0   1   0   2   0   2
+3:A    0   0   2   0   3   0
+4:B    0   1   0   3   0   4
+5:A    0   0   2   0   4   0
+
+================================================================
+CASE 5: No common character
+Input X: 'ABC'
+Input Y: 'XYZ'
+Longest common substring: ''
+Length: 0
+Start in X: None
+Start in Y: None
+DP table D (including zero-initialized row and column):
+     0:- 1:X 2:Y 3:Z
+0:-    0   0   0   0
+1:A    0   0   0   0
+2:B    0   0   0   0
+3:C    0   0   0   0
+
+================================================================
+CASE 6: Empty first string
+Input X: ''
+Input Y: 'DATA'
+Longest common substring: ''
+Length: 0
+Start in X: None
+Start in Y: None
+DP table D (including zero-initialized row and column):
+     0:- 1:D 2:A 3:T 4:A
+0:-    0   0   0   0   0
+
+================================================================
+CASE 7: Identical strings
+Input X: 'NETWORK'
+Input Y: 'NETWORK'
+Longest common substring: 'NETWORK'
+Length: 7
+Start in X: 0
+Start in Y: 0
+DP table D (including zero-initialized row and column):
+     0:- 1:N 2:E 3:T 4:W 5:O 6:R 7:K
+0:-    0   0   0   0   0   0   0   0
+1:N    0   1   0   0   0   0   0   0
+2:E    0   0   2   0   0   0   0   0
+3:T    0   0   0   3   0   0   0   0
+4:W    0   0   0   0   4   0   0   0
+5:O    0   0   0   0   0   5   0   0
+6:R    0   0   0   0   0   0   6   0
+7:K    0   0   0   0   0   0   0   7
+
+================================================================
+CASE 8: Empty second string
+Input X: 'DATA'
+Input Y: ''
+Longest common substring: ''
+Length: 0
+Start in X: None
+Start in Y: None
+DP table D (including zero-initialized row and column):
+     0:-
+0:-    0
+1:D    0
+2:A    0
+3:T    0
+4:A    0
+
+================================================================
+CASE 9: Both strings empty
+Input X: ''
+Input Y: ''
+Longest common substring: ''
+Length: 0
+Start in X: None
+Start in Y: None
+DP table D (including zero-initialized row and column):
+     0:-
+0:-    0
+
+All nine test cases and DP recurrence checks passed.
